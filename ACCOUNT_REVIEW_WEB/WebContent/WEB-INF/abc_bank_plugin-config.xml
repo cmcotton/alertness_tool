@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
+  http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
+
+	<!-- Start of ABC Banking System Plugin Injection -->
+
+	<!-- This is the payment channel used for the ABC banking system -->
+	<int:channel id="abcPaymentChannel"></int:channel>
+
+	<!-- Wire up the ABC Banking plugin -->
+	<bean id="abcBakingSysPlugin" name="abcBakingSysPlugin"
+		class="com.paymentgateway.plugins.ABCBankPlugin" />
+
+	<!-- This service activator is used to handle the payment response from 
+		ABC banking system -->
+	<int:service-activator input-channel="abcPaymentChannel"
+		ref="abcBakingSysPlugin" method="makePayment" output-channel="outputChannel"></int:service-activator>
+
+	<!-- End of ABC Banking System Plugin Injection -->
+</beans>
