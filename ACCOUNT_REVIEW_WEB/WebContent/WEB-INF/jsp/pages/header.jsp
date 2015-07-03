@@ -25,6 +25,9 @@
     href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css"
     rel="stylesheet">
 
+<!-- Timeline CSS -->
+<link href="../dist/css/timeline.css" rel="stylesheet">
+    
 <!-- DataTables Responsive CSS -->
 <link
     href="../bower_components/datatables-responsive/css/dataTables.responsive.css"
@@ -37,6 +40,9 @@
 <link href="../bower_components/font-awesome/css/font-awesome.min.css"
     rel="stylesheet" type="text/css">
 
+<!-- Morris Charts CSS -->
+<link href="../bower_components/morrisjs/morris.css" rel="stylesheet">
+    
 <!-- bootstrap-table -->
 <link href="../bootstrap-table/bootstrap-table.min.css" rel="stylesheet"
     type="text/css">
