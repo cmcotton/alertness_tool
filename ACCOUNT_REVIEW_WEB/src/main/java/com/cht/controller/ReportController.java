@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cht.layout.AbnormalLoginTable;
 import com.cht.layout.ILayout;
+import com.cht.layout.LogTable;
+import com.cht.layout.RelativeTable;
 import com.cht.layout.ReportTable;
 import com.cht.logic.AccountReview;
 import com.cht.logic.IAccountReport;
@@ -27,15 +30,10 @@ import com.cht.result.Result;
 
 /**
  * 程式資訊摘要：
- * <P>
  * 類別名稱　　：MyHelloWorld.java
- * <P>
  * 程式內容說明：
- * <P>
  * 程式修改記錄：
- * <P>
  * XXXX-XX-XX：
- * <P>
  * 
  * @author chtd
  * @version 1.0
@@ -56,31 +54,55 @@ public class ReportController {
         ProxyFactory factory = new ProxyFactory();
         factory.addAdvice(logAdvice);
 
-        logger.error(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
         String message = "<br><div style='text-align:center;'>"
                 + "<h3>********** Hello World, Spring MVC Tutorial</h3>This message is coming from CrunchifyHelloWorld.java **********</div><br><br>";
-        return new ModelAndView("pages/index", "message", message);
+        return new ModelAndView("pages/main", "content", "tables.jsp");
     }
 
+    @RequestMapping("/dashboard")
+    public ModelAndView getDashboard() {
+
+        LogProxy logAdvice = new LogProxy();
+
+        ProxyFactory factory = new ProxyFactory();
+        factory.addAdvice(logAdvice);
+      
+//        return new ModelAndView("pages/index");
+        return new ModelAndView("pages/main", "content", "index");
+    }
+    
+    @RequestMapping("/flot") 
+    public ModelAndView getFlot() {
+        return new ModelAndView("pages/flot");
+    }
+    
     @RequestMapping("/tables") 
     public ModelAndView getReportTable() {
-        return new ModelAndView("pages/tables");
+        return new ModelAndView("pages/main", "content", "tables");
+    }
+    
+    
+    @RequestMapping("/fillin") 
+    public ModelAndView getFillIn() {
+        return new ModelAndView("pages/main", "content", "fillin");
     }
     
     @RequestMapping("/forms") 
     public ModelAndView getForms() {
-        return new ModelAndView("pages/forms");
+        return new ModelAndView("pages/main", "content", "forms");
     }
     
-    @RequestMapping("/panels-wells") 
-    public ModelAndView getPanelsWells() {
-        return new ModelAndView("pages/panels-wells");
+    @RequestMapping("/regu") 
+    public ModelAndView getRegu() {
+        return new ModelAndView("pages/main", "content", "regu");
     }
-
-    @RequestMapping("/grid") 
-    public ModelAndView getGrid() {
-        return new ModelAndView("pages/grid");
+    
+    @RequestMapping("/reguToRule") 
+    public ModelAndView getReguToRule() {
+        return new ModelAndView("pages/main", "content", "reguToRule");
     }
+    
     
     @RequestMapping(value = "/{name}", method = RequestMethod.POST)
     public @ResponseBody
@@ -102,7 +124,7 @@ public class ReportController {
         res.getWriter().write(json.toString());
     }
 
-    @RequestMapping(value = "/{name}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getReportList", method = RequestMethod.GET)
     public @ResponseBody
     void getReportList(HttpServletResponse res) throws IOException {
         LogProxy logAdvice = new LogProxy();
@@ -137,5 +159,93 @@ public class ReportController {
             e.printStackTrace();
         }
     }
+    
+    /**
+     * 登出入紀錄
+     * @param res
+     * @throws IOException
+     */
+    @RequestMapping(value = "/getLogin", method = RequestMethod.GET)
+    public @ResponseBody
+    void getLogin(HttpServletResponse res) throws IOException {
+        LogProxy logAdvice = new LogProxy();
+
+        ProxyFactory factory = new ProxyFactory();
+        factory.addAdvice(logAdvice);
+
+        // list report
+        ILayout logTable = new LogTable();
+        factory.setTarget(logTable);
+        ILayout reportProxy = (ILayout) factory.getProxy();
+        List dataList = reportProxy.arrange();
+
+        try {
+
+            JSONObject json = new JSONObject();
+            json.put("data", dataList);
+            res.setCharacterEncoding("UTF-8");
+            // response.setContentType("text/html"); //设置数据格式            
+            res.setContentType("json");
+            res.getWriter().write(json.toString());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    @RequestMapping(value = "/getLogSelectAbnormalLogin", method = RequestMethod.GET)
+    public @ResponseBody
+    void getLogSelect(HttpServletResponse res) throws IOException {
+        LogProxy logAdvice = new LogProxy();
+
+        ProxyFactory factory = new ProxyFactory();
+        factory.addAdvice(logAdvice);
+
+        // list report
+        ILayout logTable = new AbnormalLoginTable();
+        factory.setTarget(logTable);
+        ILayout reportProxy = (ILayout) factory.getProxy();
+        List dataList = reportProxy.arrange();
+
+        try {
+
+            JSONObject json = new JSONObject();
+            json.put("data", dataList);
+            res.setCharacterEncoding("UTF-8");
+            res.setContentType("json");
+            res.getWriter().write(json.toString());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    @RequestMapping(value = "/getLogSelectRelative", method = RequestMethod.GET)
+    public @ResponseBody
+    void getLogSelectRelative(HttpServletResponse res) throws IOException {
+        LogProxy logAdvice = new LogProxy();
+
+        ProxyFactory factory = new ProxyFactory();
+        factory.addAdvice(logAdvice);
+
+        // list report
+        ILayout logTable = new RelativeTable();
+        factory.setTarget(logTable);
+        ILayout reportProxy = (ILayout) factory.getProxy();
+        List dataList = reportProxy.arrange();
+
+        try {
+
+            JSONObject json = new JSONObject();
+            json.put("data", dataList);
+            res.setCharacterEncoding("UTF-8");
+            // response.setContentType("text/html"); //设置数据格式            
+            res.setContentType("json");
+            res.getWriter().write(json.toString());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        }
+    }   
 
 }
