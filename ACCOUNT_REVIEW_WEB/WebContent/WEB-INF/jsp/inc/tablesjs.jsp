@@ -1,14 +1,14 @@
 <jsp:include page="js.jsp"/>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
-    /*
-        $(document).ready(function() {
+    
+        $('#submit').click(function() {
             
             $('#dataTables-example').DataTable({
-                "ajax" : 'getLogList.html',
+                "ajax" : 'getReportList.html',
                 responsive : true
             });           
             
         });
-    */
+    
     </script>
