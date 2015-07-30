@@ -4,7 +4,10 @@
 package com.cht.controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.List;
+import java.util.ServiceLoader;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,6 +28,7 @@ import com.cht.layout.RelativeTable;
 import com.cht.layout.ReportTable;
 import com.cht.logic.AccountReview;
 import com.cht.logic.IAccountReport;
+import com.cht.plugin.RegulationService;
 import com.cht.proxy.LogProxy;
 import com.cht.result.Result;
 
@@ -57,7 +61,50 @@ public class ReportController {
         logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
         String message = "<br><div style='text-align:center;'>"
                 + "<h3>********** Hello World, Spring MVC Tutorial</h3>This message is coming from CrunchifyHelloWorld.java **********</div><br><br>";
-        return new ModelAndView("pages/main", "content", "tables.jsp");
+        return new ModelAndView("pages/main", "content", "tables");
+    }
+    
+    @RequestMapping("/plugin")
+    public ModelAndView runPlugin() {
+
+        try {
+            LogProxy logAdvice = new LogProxy();
+
+            ProxyFactory factory = new ProxyFactory();
+            factory.addAdvice(logAdvice);
+
+            //Get the System Classloader
+            ClassLoader sysClassLoader = ClassLoader.getSystemClassLoader();
+     
+            //Get the URLs
+            URL[] urls = ((URLClassLoader)sysClassLoader).getURLs();
+     
+            for(int i=0; i< urls.length; i++) {
+                System.out.println(urls[i].getFile());
+            }    
+            
+            logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            URL[] us = ((URLClassLoader) (Thread.currentThread().getContextClassLoader())).getURLs();
+            for (URL temp :us) {
+                System.out.println(temp.toString());
+            }
+            
+            
+         // 載入 ServiceLoader.
+            ServiceLoader<RegulationService> serviceLoader = ServiceLoader.load(RegulationService.class);
+
+            System.out.println("before");
+            // 遊走所有 service 物件.
+            for (RegulationService service : serviceLoader) {
+                System.out.println(">>>>>");
+                service.get("aaa");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+        return new ModelAndView("pages/main", "content", "tables");
     }
 
     @RequestMapping("/dashboard")
