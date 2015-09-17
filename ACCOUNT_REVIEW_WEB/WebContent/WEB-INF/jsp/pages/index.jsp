@@ -16,7 +16,7 @@
 							<i class="fa fa-comments fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
-							<div class="huge">26</div>
+							<div class="huge" id="regu-applicable"></div>
 							<div>適用項目數</div>
 						</div>
 					</div>
@@ -38,34 +38,7 @@
 									aria-hidden="true">&times;</button>
 								<h4 class="modal-title">Confirmation</h4>
 							</div>
-							<div class="modal-body">
-								<p>1. 第1條</p>
-								<p>2. 第2條</p>
-								<p>3. 第3條</p>
-								<p>4. 第4條</p>
-								<p>5. 第5條</p>
-								<p>6. 第6條</p>
-								<p>7. 第7條</p>
-								<p>8. 第8條</p>
-								<p>9. 第9條</p>
-								<p>10. 第10條</p>
-								<p>11. 第11條</p>
-								<p>12. 第12條</p>
-								<p>13. 第13條</p>
-								<p>14. 第14條</p>
-								<p>15. 第15條</p>
-								<p>16. 第16條</p>
-								<p>17. 第17條</p>
-								<p>18. 第18條</p>
-								<p>19. 第19條</p>
-								<p>20. 第20條</p>
-								<p>21. 第21條</p>
-								<p>22. 第22條</p> 
-								<p>23. 第23條</p>
-								<p>24. 第24條</p>
-								<p>25. 第25條</p>
-								<p>26. 第26條</p>
-							</div>
+							<div class="modal-body" id="regu-applicable-list"></div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
@@ -83,12 +56,12 @@
 							<i class="fa fa-tasks fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
-							<div class="huge">12</div>
+							<div class="huge" id="regu-pass">12</div>
 							<div>符合項目數</div>
 						</div>
 					</div>
 				</div>
-				<a href="#myModalValid" data-toggle="modal">
+				<a href="#myModalPass" data-toggle="modal">
 					<div class="panel-footer">
 						<span class="pull-left">View Details</span> <span
 							class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -97,7 +70,7 @@
 				</a>
 
 				<!-- Modal HTML -->
-				<div id="myModalValid" class="modal fade">
+				<div id="myModalPass" class="modal fade">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -105,20 +78,7 @@
 									aria-hidden="true">&times;</button>
 								<h4 class="modal-title">符合項目列表</h4>
 							</div>
-							<div class="modal-body">
-								<p>1. 第1條</p>
-								<p>2. 第2條</p>
-								<p>3. 第3條</p>
-								<p>4. 第4條</p>
-								<p>5. 第5條</p>
-								<p>6. 第6條</p>
-								<p>7. 第7條</p>
-								<p>8. 第8條</p>
-								<p>9. 第9條</p>
-								<p>10. 第10條</p>
-								<p>11. 第11條</p>
-								<p>12. 第12條</p>
-							</div>
+							<div class="modal-body" id="regu-pass-list"></div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
@@ -136,7 +96,7 @@
 							<i class="fa fa-shopping-cart fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
-							<div class="huge">3</div>
+							<div class="huge" id="regu-nonexec">3</div>
 							<div>未執行項目數</div>
 						</div>
 					</div>
@@ -158,11 +118,7 @@
 									aria-hidden="true">&times;</button>
 								<h4 class="modal-title">未執行項目列表</h4>
 							</div>
-							<div class="modal-body">
-								<p>1. 第1條</p>
-								<p>2. 第2條</p>
-								<p>3. 第3條</p>
-							</div>
+							<div class="modal-body" id="regu-nonexec-list"></div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
@@ -180,7 +136,7 @@
 							<i class="fa fa-support fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
-							<div class="huge">11</div>
+							<div class="huge" id="regu-violate">11</div>
 							<div>違反規範項目數</div>
 						</div>
 					</div>
@@ -202,19 +158,7 @@
 									aria-hidden="true">&times;</button>
 								<h4 class="modal-title">違反規範項目列表</h4>
 							</div>
-							<div class="modal-body">
-								<p>1. 第1條</p>
-								<p>2. 第2條</p>
-								<p>3. 第3條</p>
-								<p>4. 第4條</p>
-								<p>5. 第5條</p>
-								<p>6. 第6條</p>
-								<p>7. 第7條</p>
-								<p>8. 第8條</p>
-								<p>9. 第9條</p>
-								<p>10. 第10條</p>
-								<p>11. 第11條</p>
-							</div>
+							<div class="modal-body" id="regu-violate-list"></div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
@@ -230,7 +174,7 @@
 		<div class="col-lg-8">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-bar-chart-o fa-fw"></i>日誌數量趨勢
+					<i class="fa fa-bar-chart-o fa-fw"></i>過去12個月符合性檢視統計趨勢
 				</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
@@ -254,6 +198,7 @@
 				<!-- /.panel-body -->
 			</div>
 			<!-- /.panel -->
+
 
 		</div>
 		<!-- /.col-lg-4 -->

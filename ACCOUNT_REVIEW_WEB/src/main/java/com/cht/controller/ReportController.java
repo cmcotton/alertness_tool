@@ -9,6 +9,7 @@ import java.net.URLClassLoader;
 import java.util.List;
 import java.util.ServiceLoader;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
@@ -22,15 +23,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cht.layout.AbnormalLoginTable;
-import com.cht.layout.ILayout;
+import com.cht.layout.Layout;
 import com.cht.layout.LogTable;
 import com.cht.layout.RelativeTable;
 import com.cht.layout.ReportTable;
 import com.cht.logic.AccountReview;
 import com.cht.logic.IAccountReport;
-import com.cht.plugin.RegulationService;
+import com.cht.plugin.RegulationPlugin;
 import com.cht.proxy.LogProxy;
 import com.cht.result.Result;
+import com.cht.service.RuleManager;
 
 /**
  * 程式資訊摘要：
@@ -49,6 +51,9 @@ import com.cht.result.Result;
 public class ReportController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+    
+    @Resource
+    private RuleManager reportManager;
 
     @RequestMapping("/welcome")
     public ModelAndView helloWorld() {
@@ -58,7 +63,10 @@ public class ReportController {
         ProxyFactory factory = new ProxyFactory();
         factory.addAdvice(logAdvice);
 
-        logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>");       
+        
+ 
+        
         String message = "<br><div style='text-align:center;'>"
                 + "<h3>********** Hello World, Spring MVC Tutorial</h3>This message is coming from CrunchifyHelloWorld.java **********</div><br><br>";
         return new ModelAndView("pages/main", "content", "tables");
@@ -91,11 +99,11 @@ public class ReportController {
             
             
          // 載入 ServiceLoader.
-            ServiceLoader<RegulationService> serviceLoader = ServiceLoader.load(RegulationService.class);
+            ServiceLoader<RegulationPlugin> serviceLoader = ServiceLoader.load(RegulationPlugin.class);
 
             System.out.println("before");
             // 遊走所有 service 物件.
-            for (RegulationService service : serviceLoader) {
+            for (RegulationPlugin service : serviceLoader) {
                 System.out.println(">>>>>");
                 service.get("aaa");
             }
@@ -140,10 +148,10 @@ public class ReportController {
         return new ModelAndView("pages/main", "content", "forms");
     }
     
-    @RequestMapping("/regu") 
-    public ModelAndView getRegu() {
-        return new ModelAndView("pages/main", "content", "regu");
-    }
+//    @RequestMapping("/regu") 
+//    public ModelAndView getRegu() {
+//        return new ModelAndView("pages/main", "content", "regu");
+//    }
     
     @RequestMapping("/reguToRule") 
     public ModelAndView getReguToRule() {
@@ -188,9 +196,9 @@ public class ReportController {
         logger.info("after gen reports");
 
         // list report
-        ILayout reportTable = new ReportTable();
+        Layout reportTable = new ReportTable();
         factory.setTarget(reportTable);
-        ILayout reportProxy = (ILayout) factory.getProxy();
+        Layout reportProxy = (Layout) factory.getProxy();
         List dataList = reportProxy.arrange();
 
         try {
@@ -221,9 +229,9 @@ public class ReportController {
         factory.addAdvice(logAdvice);
 
         // list report
-        ILayout logTable = new LogTable();
+        Layout logTable = new LogTable();
         factory.setTarget(logTable);
-        ILayout reportProxy = (ILayout) factory.getProxy();
+        Layout reportProxy = (Layout) factory.getProxy();
         List dataList = reportProxy.arrange();
 
         try {
@@ -249,9 +257,9 @@ public class ReportController {
         factory.addAdvice(logAdvice);
 
         // list report
-        ILayout logTable = new AbnormalLoginTable();
+        Layout logTable = new AbnormalLoginTable();
         factory.setTarget(logTable);
-        ILayout reportProxy = (ILayout) factory.getProxy();
+        Layout reportProxy = (Layout) factory.getProxy();
         List dataList = reportProxy.arrange();
 
         try {
@@ -276,9 +284,9 @@ public class ReportController {
         factory.addAdvice(logAdvice);
 
         // list report
-        ILayout logTable = new RelativeTable();
+        Layout logTable = new RelativeTable();
         factory.setTarget(logTable);
-        ILayout reportProxy = (ILayout) factory.getProxy();
+        Layout reportProxy = (Layout) factory.getProxy();
         List dataList = reportProxy.arrange();
 
         try {

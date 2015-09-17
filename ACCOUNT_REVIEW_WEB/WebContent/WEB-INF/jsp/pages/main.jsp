@@ -12,6 +12,9 @@
 
 <title>二科三組的好東西</title>
 
+<!-- my custom -->
+<link href="../css/my.css" rel="stylesheet" type="text/css">  
+
 <!-- Bootstrap Core CSS -->
 <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css"
     rel="stylesheet">
@@ -46,6 +49,8 @@
 <!-- bootstrap-table -->
 <link href="../bootstrap-table/bootstrap-table.min.css" rel="stylesheet"
     type="text/css">
+    
+  
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

@@ -15,23 +15,17 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.cht.db.DBConnection;
+import com.cht.db.MySQLDBConnection;
 import com.cht.util.PropertyReader;
 
 import excel.ExcelDataWriter;
 
 /**
  * 程式資訊摘要：
- * <P>
  * 類別名稱　　：AccountReview.java
- * <P>
  * 程式內容說明：
- * <P>
  * 程式修改記錄：
- * <P>
  * XXXX-XX-XX：
- * <P>
- * 
  * @author chtd
  * @version 1.0
  * @since 1.0
@@ -41,7 +35,7 @@ public class AccountReview implements IAccountReport {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     
     public void execute() {
-        DBConnection db = new DBConnection();
+        MySQLDBConnection db = new MySQLDBConnection();
         Connection conDB = db.getConnection();
         ResultSet rs = null;
         if (conDB != null) {

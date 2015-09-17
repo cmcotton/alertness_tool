@@ -1,6 +1,16 @@
 eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/jsp/inc/fillinjs.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/inc/formsjs.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/inc/indexjs.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/inc/reguToRulejs.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/pages/fillin.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/pages/forms.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/pages/header.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/pages/index.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/pages/main.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/pages/regu.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/pages/reguToRule.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/pages/rule.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/pages/tables.jsp=UTF-8
 encoding//src/test/java=UTF-8
 encoding//src/test/resources=UTF-8

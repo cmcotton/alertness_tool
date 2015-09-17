@@ -3,78 +3,75 @@ $(function() {
     Morris.Area({
         element: 'morris-area-chart',
         data: [{
-            period: '2010 Q1',
-            iphone: 2666,
-            ipad: null,
-            itouch: 2647
+            period: '2014-08',
+            符合項目: 8,
+            未執行: 2,
+            違反規範: 7
         }, {
-            period: '2010 Q2',
-            iphone: 2778,
-            ipad: 2294,
-            itouch: 2441
+            period: '2014-09',
+            符合項目: 7,
+            未執行: 3,
+            違反規範: 9
         }, {
-            period: '2010 Q3',
-            iphone: 4912,
-            ipad: 1969,
-            itouch: 2501
+            period: '2014-10',
+            符合項目: 8,
+            未執行: 2,
+            違反規範: 7
         }, {
-            period: '2010 Q4',
-            iphone: 3767,
-            ipad: 3597,
-            itouch: 5689
+            period: '2014-11',
+            符合項目: 8,
+            未執行: 4,
+            違反規範: 1
         }, {
-            period: '2011 Q1',
-            iphone: 6810,
-            ipad: 1914,
-            itouch: 2293
+            period: '2014-12',
+            符合項目: 2,
+            未執行: 9,
+            違反規範: 1
         }, {
-            period: '2011 Q2',
-            iphone: 5670,
-            ipad: 4293,
-            itouch: 1881
+            period: '2015-01',
+            符合項目: 7,
+            未執行: 7,
+            違反規範: 9
         }, {
-            period: '2011 Q3',
-            iphone: 4820,
-            ipad: 3795,
-            itouch: 1588
+            period: '2015-02',
+            符合項目: 0,
+            未執行: 4,
+            違反規範: 3
         }, {
-            period: '2011 Q4',
-            iphone: 15073,
-            ipad: 5967,
-            itouch: 5175
+            period: '2015-03',
+            符合項目: 5,
+            未執行: 3,
+            違反規範: 1
         }, {
-            period: '2012 Q1',
-            iphone: 10687,
-            ipad: 4460,
-            itouch: 2028
+            period: '2015-04',
+            符合項目: 0,
+            未執行: 5,
+            違反規範: 8
         }, {
-            period: '2012 Q2',
-            iphone: 8432,
-            ipad: 5713,
-            itouch: 1791
+            period: '2015-05',
+            符合項目: 3,
+            未執行: 7,
+            違反規範: 5
+        }, {
+            period: '2015-06',
+            符合項目: 20,
+            未執行: 4,
+            違反規範: 12
+        }, {
+            period: '2015-07',
+            符合項目: 12,
+            未執行: 3,
+            違反規範: 11
         }],
         xkey: 'period',
-        ykeys: ['iphone', 'ipad', 'itouch'],
-        labels: ['iPhone', 'iPad', 'iPod Touch'],
-        pointSize: 2,
+        ykeys: ['符合項目', '未執行', '違反規範'],
+        labels: ['符合項目', '未執行', '違反規範'],
+        pointSize: 4,
         hideHover: 'auto',
         resize: true
     });
 
-    Morris.Donut({
-        element: 'morris-donut-chart',
-        data: [{
-            label: "Download Sales",
-            value: 12
-        }, {
-            label: "In-Store Sales",
-            value: 30
-        }, {
-            label: "Mail-Order Sales",
-            value: 20
-        }],
-        resize: true
-    });
+    
 
     Morris.Bar({
         element: 'morris-bar-chart',

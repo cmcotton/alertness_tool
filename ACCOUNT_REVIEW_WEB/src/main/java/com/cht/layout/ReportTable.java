@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.cht.entity.RuleEntity;
 import com.cht.io.FileManager;
 
 /**
@@ -21,7 +22,7 @@ import com.cht.io.FileManager;
  *@version 1.0
  *@since 1.0
  */
-public class ReportTable implements ILayout {
+public class ReportTable implements Layout {
 
     /* (non-Javadoc)
      * @see com.cht.layout.ILayout#arrange()
@@ -40,6 +41,15 @@ public class ReportTable implements ILayout {
             dataList.add(list);
         } 
         return dataList;
+    }
+
+    /* (non-Javadoc)
+     * @see com.cht.layout.Layout#renderDataTable(java.util.List)
+     */
+    @Override
+    public List renderDataTable(List<RuleEntity> data) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

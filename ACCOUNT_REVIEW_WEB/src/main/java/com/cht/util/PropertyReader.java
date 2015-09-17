@@ -3,9 +3,8 @@
  */
 package com.cht.util;
 
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Date;
@@ -43,16 +42,15 @@ public class PropertyReader {
         String propFileName = "config.properties";
         
         if (Env.DEV == determineEnv()) {
-            propFileName = "config_dev.properties";
+            String path = this.getClass().getClassLoader().getResource("").getPath();
+            propFileName = path + "config_dev.properties";
         }
+         
         
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
-
-        if (inputStream != null) {
-            prop.load(inputStream);
-        } else {
-            throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
-        }
+        
+//        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
+        FileInputStream inputStream = new FileInputStream(propFileName);
+        prop.load(inputStream);
 
         Date time = new Date(System.currentTimeMillis());
 
@@ -77,4 +75,6 @@ public class PropertyReader {
         
         return env;
     }
+    
+   
 }

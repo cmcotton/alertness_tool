@@ -17,18 +17,13 @@
                                 <div class="col-lg-12">
                                     <form role="form">
                                         <div class="form-group">
-                                            <label>報表類型</label>
-                                            <select class="form-control">
-                                                <option>應用系統</option>
-                                                <option>主機/伺服器</option>
+                                            <label>條文</label>
+                                            <select class="form-control" id="regu-select">
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>報表名稱</label>
+                                            <label>規則</label>
                                             <select class="form-control" id="report-name">
-                                                <option>登出入軌跡紀錄</option>
-                                                <option>異常帳號登入稽核</option>
-                                                <option>特定關係人查詢稽核</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -63,18 +58,22 @@
                                     <div class="dataTable_wrapper">
 		                                <table class="table table-striped table-bordered table-hover"
 		                                    id="dataTables-example">
+		                                    <!-- 
 		                                    <thead>
 		                                        <tr>
 		                                            <th data-field="name">使用者</th>
-		                                            <th data-field="lastModified">時間</th>
+		                                            <th data-field="lastModified">時間</th>		                                            
+		                                            <th data-field="forks_count">附件</th>
 		                                            <th data-field="forks_count">事件</th>
+		                                            
 		                                            <th data-field="forks_count">主機</th>
 		                                            <th data-field="description">功能</th>
 		                                            <th data-field="description">鍵項</th>
 		                                            <th data-field="description">鍵項值</th>
-		                                            <th data-field="description">註記</th>
+		                                            <th data-field="description">異常說明</th>
 		                                        </tr>
-		                                    </thead>                                    
+		                                    </thead>
+		                                     -->                                    
 		                                </table>
 		                            </div>
                                 </div>

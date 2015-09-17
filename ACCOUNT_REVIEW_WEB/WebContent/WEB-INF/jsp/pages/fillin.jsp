@@ -16,15 +16,11 @@
 						<div class="col-lg-12">
 							<form role="form">
 								<div class="form-group">
-									<label>報表類型</label> <select class="form-control">
-										<option>應用系統</option>
-										<option>主機/伺服器</option>
+									<label>條文</label> <select class="form-control" id="regu-select">
 									</select>
 								</div>
 								<div class="form-group">
-									<label>報表名稱</label> <select class="form-control"
-										id="report-name">
-										<option>個人PC自檢表</option>
+									<label>規則</label> <select class="form-control"	id="report-name">
 									</select>
 								</div>
 								<div class="form-group">
@@ -48,12 +44,16 @@
 									<p class="help-block">區間起始日</p>
 								</div>
 								<div class="form-group">
-									<label>File input</label> <input type="file">
+									<label>上傳佐證資料</label> <input type="file" id="file-upload">
 								</div>
 							</form>
 
-                            <button type="button" class="btn btn-info btn-circle btn-xl"><i class="fa fa-check"></i>
-                            </button>
+							<button type="button" class="btn btn-info btn-circle btn-xl" id="pass">
+								<i class="fa fa-check"></i>
+							</button>
+                            <button type="button" class="btn btn-warning btn-circle btn-xl" id="violate">
+                                <i class="fa fa-times"></i>
+                            </button>							
 						</div>
 
 					</div>

@@ -6,4 +6,7 @@
 
 	<context:component-scan base-package="com.cht.payment.services" />
 	<context:annotation-config />
+	
+
+    
 </beans>  

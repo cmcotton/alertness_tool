@@ -202,25 +202,20 @@
 					</div> <!-- /input-group -->
 				</li>
 				<li><a href="dashboard.html"><i
-						class="fa fa-dashboard fa-fw"></i> 儀表板</a></li>						
+						class="fa fa-dashboard fa-fw"></i> 儀表板</a></li>
 				<li><a href="forms.html"><i class="fa fa-edit fa-fw"></i>
 						符合性檢視作業</a></li>
-                <li><a href="fillin.html"><i class="fa fa-edit fa-fw"></i>
-                                                    自行填報作業</a></li>						
+				<li><a href="fillin.html"><i class="fa fa-edit fa-fw"></i>
+						自行填報作業</a></li>
 				<li><a href="tables.html"><i class="fa fa-table fa-fw"></i>報表下載</a></li>
-				
-				<li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 規範管理作業<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="regu.html">條文管理</a>
-                                </li>
-                                <li>
-                                    <a href="reguToRule.html">條文與規則對照管理</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+
+				<li><a href="/account/regu/#"><i class="fa fa-bar-chart-o fa-fw"></i>
+						規範管理作業<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="/account/regu/regumgt.html">條文管理</a></li>
+						<li><a href="/account/regu/rule.html">規則管理</a></li>
+						<li><a href="/account/regu/reguToRule.html">條文與規則對照管理</a></li>
+					</ul> <!-- /.nav-second-level --></li>
 			</ul>
 		</div>
 		<!-- /.sidebar-collapse -->
