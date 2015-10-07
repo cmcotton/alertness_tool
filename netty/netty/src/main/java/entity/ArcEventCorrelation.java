@@ -8,6 +8,8 @@ package entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -26,7 +28,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ARC_EVENT_CORRELATION")
 public class ArcEventCorrelation implements Event {
+    
+    
+    private long id;
+    
     private String BASE_EVENT_IDS = "";
+    
     @Id
     private long CORRELATED_EVENT_ID = 0;
     private String ESM_HOST = "";
@@ -92,6 +99,18 @@ public class ArcEventCorrelation implements Event {
     public void setMANAGER_RECEIPT_TIME(Date date) {
         // TODO Auto-generated method stub
         
+    }
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
     }
     
     

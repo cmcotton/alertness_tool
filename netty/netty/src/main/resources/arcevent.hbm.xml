@@ -4,15 +4,15 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
 <hibernate-mapping>
 	<class name="entity.ArcEvent" table="arc_event">
-<!-- 
-		<id name="id" type="int">
-			<column name="id" sql-type="int" />
-			<generator class="identity" />
+
+		<id name="id" column="id" type="int">
+			<generator class="native" />
 		</id>
- -->
-        <id name="EVENT_ID" type="long" >
-            <column name="EVENT_ID"  />
-        </id>
+   
+        <property name="EVENT_ID" type="long" not-null="true">
+            <column name="EVENT_ID" not-null="true" />
+        </property>
+        
         
 		<property name="ESM_HOST" type="string" not-null="true">
 			<column name="ESM_HOST" not-null="true" />

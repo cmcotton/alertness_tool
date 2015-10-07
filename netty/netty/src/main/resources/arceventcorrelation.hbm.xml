@@ -4,10 +4,15 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
 <hibernate-mapping>
 	<class name="entity.ArcEventCorrelation" table="arc_event_correlation">
-
-        <id name="CORRELATED_EVENT_ID" type="long" >
-            <column name="CORRELATED_EVENT_ID"  />
+<!-- 
+        <id name="id" type="int">
+            <column name="id" sql-type="int" />
+            <generator class="native" />
         </id>
+         -->
+        <property name="CORRELATED_EVENT_ID" type="long" >
+            <column name="CORRELATED_EVENT_ID"  />
+        </property>
         
 		<property name="BASE_EVENT_IDS" type="string" not-null="true">
 			<column name="BASE_EVENT_IDS" not-null="true" />

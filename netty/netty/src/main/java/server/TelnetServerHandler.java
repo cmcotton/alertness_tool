@@ -12,27 +12,27 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import java.net.InetAddress;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import parser.CEFParser;
-
-import com.google.gson.JsonObject;
-
 import db.DBConnection;
-import entity.ArcEvent;
+import db.DBConnectionNative;
 import entity.Event;
-
-
+import errorhandle.MyCEFParsingException;
 
 /**
  * Handles a server-side channel.
  */
 @Sharable
 public class TelnetServerHandler extends SimpleChannelInboundHandler<String> {
+
+    static int counter = 0;
+
+    private Logger log = LoggerFactory.getLogger(getClass());
+    private CEFParser parser = new CEFParser();
+    private DBConnection db = new DBConnectionNative();
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -41,7 +41,7 @@ public class TelnetServerHandler extends SimpleChannelInboundHandler<String> {
         ctx.write("It is " + new Date() + " now.\r\n");
         ctx.flush();
     }
-    
+
     public void messageReceived(ChannelHandlerContext ctx, String request) {
         // Generate and write a response.
         String response;
@@ -56,7 +56,8 @@ public class TelnetServerHandler extends SimpleChannelInboundHandler<String> {
         }
 
         // We do not need to write a ChannelBuffer here.
-        // We know the encoder inserted at TelnetPipelineFactory will do the conversion.
+        // We know the encoder inserted at TelnetPipelineFactory will do the
+        // conversion.
         ChannelFuture future = ctx.write(response);
 
         // Close the connection after sending 'Have a good day!'
@@ -77,24 +78,36 @@ public class TelnetServerHandler extends SimpleChannelInboundHandler<String> {
         ctx.close();
     }
 
-    /* (non-Javadoc)
-     * @see io.netty.channel.SimpleChannelInboundHandler#channelRead0(io.netty.channel.ChannelHandlerContext, java.lang.Object)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * io.netty.channel.SimpleChannelInboundHandler#channelRead0(io.netty.channel
+     * .ChannelHandlerContext, java.lang.Object)
      */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
-        Logger log = LoggerFactory.getLogger(getClass());
+        log.info("---------------------------------{}", counter++);
+  
+        List<Event> evts = null; 
         
-        CEFParser parser = new CEFParser();
-        List<Event> evts = parser.parse(msg);
-        
-        DBConnection db = new DBConnection();
+        try {
+            
+            evts = parser.parse(msg);
+            
+        } catch(MyCEFParsingException e) {
+            
+            parser.handleParsingError(msg);
+            
+        }
+             
         db.connect();
         for (Event e : evts) {
             db.save(e);
         }
-        db.close();
+//        db.close();
         log.info("---------------------------------------------------------");
         
-        messageReceived(ctx, msg);
+//        messageReceived(ctx, msg);
     }
 }

@@ -8,6 +8,8 @@ package entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -27,14 +29,17 @@ import javax.persistence.Table;
 @Table(name = "ARC_EVENT")
 public class ArcEvent implements Event {
     
+    
+    private long id;
+    
     private String ESM_HOST = "";
     
     @Id
     private long EVENT_ID;
     private Date START_TIME = new Date();
     private String NAME = "";
-    private int PRIORITY;
-    private long SRC_ADDRESS;
+    private int PRIORITY = 0;
+    private long SRC_ADDRESS = 0;
     private int SRC_PORT;
     private String SOURCE_COUNTRY_NAME = "";
     private long DEST_ADDRESS;
@@ -62,7 +67,7 @@ public class ArcEvent implements Event {
     private String DVC_VENDOR = "";
     private String SRC_USER_NAME = "";
     private String DEST_USER_NAME = "";
-    private long DVC_ADDRESS;
+    private long DVC_ADDRESS = 0;
     private String DVC_HOST_NAME = "";
     private String DVC_PROCESS_NAME = "";
     private String REQUEST_URL = "";
@@ -621,6 +626,18 @@ public class ArcEvent implements Event {
     public void setEnd_time(Date date) {
         // TODO Auto-generated method stub
         
+    }
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
     }
 
     
