@@ -33,6 +33,8 @@ public class Loader {
         ServiceLoader<Analyzer> serviceLoader = ServiceLoader.load(Analyzer.class);
         List analyzers = new ArrayList();
         
+        
+        
         for (Analyzer service : serviceLoader) {
 
             System.out.println("loading " + service.toString());

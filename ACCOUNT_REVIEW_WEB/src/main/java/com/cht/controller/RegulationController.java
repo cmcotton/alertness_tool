@@ -24,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cht.analyzer.Loader;
-import com.cht.entity.FillinEntity;
 import com.cht.entity.RegulationEntity;
 import com.cht.entity.RuleEntity;
 import com.cht.layout.AbnormalLoginTable;
@@ -152,26 +150,11 @@ public class RegulationController {
         return new ModelAndView("pages/main", "content", "reguToRule");
     }
     
-    
-//    @RequestMapping(value = "/{name}", method = RequestMethod.POST)
-//    public @ResponseBody
-//    void getUser(HttpServletResponse res) throws IOException {
-//        Result result = new Result();
-//
-//        String message = "<br><div style='text-align:center;'>"
-//                + "<h3>********** Hello World, Spring MVC Tutorial</h3>This message is coming from CrunchifyHelloWorld.java **********</div><br><br>";
-//        result.setWhat(message);
-//
-//        logger.debug(message);
-//
-//        // List<String> list = Arrays.asList("a", "b");
-//        Result r = new Result();
-//        r.setWhat("jeigqjeigrjiqgr");
-//        r.setWho("I am the king");
-//        JSONObject json = new JSONObject(r);
-//        res.setContentType("json");
-//        res.getWriter().write(json.toString());
-//    }
+    @RequestMapping("/assembleDataset") 
+    public ModelAndView getAssembleDataset() {
+        return new ModelAndView("pages/main", "content", "assembleDataset");
+    }
+  
 
     @RequestMapping(value = "/getReportList", method = RequestMethod.GET)
     public @ResponseBody
@@ -286,11 +269,12 @@ public class RegulationController {
                
             JSONArray jsonArr = new JSONArray();
             
-            for (RegulationEntity e : dataList) {
-                JSONObject json = new JSONObject(e);
-                jsonArr.put(json.toString());
-            }
-
+            dataList.forEach(e -> setJson(e, jsonArr));
+            
+//            for (RegulationEntity e : dataList) {
+//                JSONObject json = new JSONObject(e);
+//                jsonArr.put(json.toString());
+//            }
 
             res.setCharacterEncoding("UTF-8");
             res.setContentType("json");
@@ -438,6 +422,12 @@ public class RegulationController {
         logger.debug("rule to insert: {}", rule);
  
         reguManager.fillinRule(oper, rule, attach);
+    }
+    
+    
+    private void setJson(RegulationEntity e, JSONArray jsonArr) {
+        JSONObject json = new JSONObject(e);
+        jsonArr.put(json.toString());
     }
 
 }

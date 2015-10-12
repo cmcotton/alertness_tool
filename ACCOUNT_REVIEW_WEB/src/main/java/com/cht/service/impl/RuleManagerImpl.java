@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +41,7 @@ public class RuleManagerImpl implements RuleManager {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    private List riskEvents;
+    private List riskEvents;    
 
     /*
      * (non-Javadoc)
@@ -55,24 +56,22 @@ public class RuleManagerImpl implements RuleManager {
         MySQLDBConnection db = new MySQLDBConnection();
         SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
 
-        List<LoginLogEntity> source = null;
+        
         try {
             Date[] period = { sdf.parse("2015-08-19 00:00:00"), sdf.parse("2015-10-20 00:00:00") };
-            source = db.queryLoginLog(period);
+            
+            final List<LoginLogEntity> source = db.queryLoginLog(period);
+            
+            // run every analyzer, should be in batch job
+            analyzers.forEach(a -> run(a, ruleId, source));
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
         this.riskEvents = null;
         
-        // run every analyzer, should be in batch job
-        for (Analyzer a : analyzers) {
-            if (ruleId.equals(a.getRuleId())) {
-                List riskEvents = a.analyze(source);
-                this.riskEvents = riskEvents;
-            }
-        }
 
+     
     }
 
     /*
@@ -90,4 +89,10 @@ public class RuleManagerImpl implements RuleManager {
         return this.riskEvents;
     }
 
+    private void run(Analyzer a, String ruleId, List source) {
+        if (ruleId.equals(a.getRuleId())) {
+            List riskEvents = a.analyze(source);
+            this.riskEvents = riskEvents;
+        }
+    }
 }

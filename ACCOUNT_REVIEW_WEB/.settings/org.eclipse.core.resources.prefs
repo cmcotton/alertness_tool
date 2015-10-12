@@ -1,8 +1,10 @@
 eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/jsp/inc/assembleDatasetjs.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/inc/fillinjs.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/inc/formsjs.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/inc/indexjs.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/inc/reguToRulejs.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/pages/assembleDataset.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/pages/fillin.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/pages/forms.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/pages/header.jsp=UTF-8

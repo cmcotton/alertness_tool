@@ -1,5 +1,5 @@
-
-<div id="page-wrapper">
+  
+<div id="page-wrapper" ng-controller="IndexCtrl"> {{test}}
 	<div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">儀表板</h1>
@@ -16,7 +16,7 @@
 							<i class="fa fa-comments fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
-							<div class="huge" id="regu-applicable"></div>
+							<div class="huge" id="regu-applicable">{{applicableRegusSize}}</div>
 							<div>適用項目數</div>
 						</div>
 					</div>
@@ -38,7 +38,13 @@
 									aria-hidden="true">&times;</button>
 								<h4 class="modal-title">Confirmation</h4>
 							</div>
-							<div class="modal-body" id="regu-applicable-list"></div>
+							<div class="modal-body" id="regu-applicable-list">
+								<table>
+								 <tr ng-repeat="x in applicableRegus">
+	                                 <td>{{x}}</td>
+	                             </tr>                             
+								</table>
+							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
@@ -56,7 +62,7 @@
 							<i class="fa fa-tasks fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
-							<div class="huge" id="regu-pass">12</div>
+							<div class="huge" id="regu-pass">{{passRegusSize}}</div>
 							<div>符合項目數</div>
 						</div>
 					</div>
@@ -78,7 +84,11 @@
 									aria-hidden="true">&times;</button>
 								<h4 class="modal-title">符合項目列表</h4>
 							</div>
-							<div class="modal-body" id="regu-pass-list"></div>
+							<div class="modal-body" id="regu-pass-list"><table>
+                                 <tr ng-repeat="x in passRegus">
+                                     <td>{{x}}</td>
+                                 </tr>                             
+                                </table></div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
@@ -96,7 +106,7 @@
 							<i class="fa fa-shopping-cart fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
-							<div class="huge" id="regu-nonexec">3</div>
+							<div class="huge" id="regu-nonexec">{{nonexecRegusSize}}</div>
 							<div>未執行項目數</div>
 						</div>
 					</div>
@@ -118,7 +128,11 @@
 									aria-hidden="true">&times;</button>
 								<h4 class="modal-title">未執行項目列表</h4>
 							</div>
-							<div class="modal-body" id="regu-nonexec-list"></div>
+							<div class="modal-body" id="regu-nonexec-list"><table>
+                                 <tr ng-repeat="x in nonexecRegus">
+                                     <td>{{x}}</td>
+                                 </tr>                             
+                                </table></div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
@@ -136,7 +150,7 @@
 							<i class="fa fa-support fa-5x"></i>
 						</div>
 						<div class="col-xs-9 text-right">
-							<div class="huge" id="regu-violate">11</div>
+							<div class="huge" id="regu-violate">{{violateRegusSize}}</div>
 							<div>違反規範項目數</div>
 						</div>
 					</div>
@@ -158,7 +172,11 @@
 									aria-hidden="true">&times;</button>
 								<h4 class="modal-title">違反規範項目列表</h4>
 							</div>
-							<div class="modal-body" id="regu-violate-list"></div>
+							<div class="modal-body" id="regu-violate-list"><table>
+                                 <tr ng-repeat="x in violateRegus">
+                                     <td>{{x}}</td>
+                                 </tr>                             
+                                </table></div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>

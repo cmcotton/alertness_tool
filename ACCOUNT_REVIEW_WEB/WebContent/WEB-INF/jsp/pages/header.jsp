@@ -214,6 +214,7 @@
 					<ul class="nav nav-second-level">
 						<li><a href="/account/regu/regumgt.html">條文管理</a></li>
 						<li><a href="/account/regu/rule.html">規則管理</a></li>
+						<li><a href="/account/regu/assembleDataset.html">自組規則管理</a></li>
 						<li><a href="/account/regu/reguToRule.html">條文與規則對照管理</a></li>
 					</ul> <!-- /.nav-second-level --></li>
 			</ul>
