@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * 程式資訊摘要：
  * <P>
@@ -25,24 +28,34 @@ import java.util.ServiceLoader;
  */
 public class Loader {
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
+    
     public List<Analyzer> load() {
-        
-        
         // 載入 ServiceLoader.
 
         ServiceLoader<Analyzer> serviceLoader = ServiceLoader.load(Analyzer.class);
         List analyzers = new ArrayList();
         
-        
-        
         for (Analyzer service : serviceLoader) {
-
-            System.out.println("loading " + service.toString());
+            logger.info("loading " + service.toString());
             analyzers.add(service);
-
         }
         
         return analyzers;
+    }
+    
+    public List<RuleBlock> loadRuleBlock() {
+        
+        // 載入 ServiceLoader.
+        ServiceLoader<RuleBlock> serviceLoader = ServiceLoader.load(RuleBlock.class);
+        List<RuleBlock> ruleBlocks = new ArrayList<RuleBlock>();
+        
+        for (RuleBlock service : serviceLoader) {
+            logger.info("loading " + service.toString());
+            ruleBlocks.add(service);
+        }
+        
+        return ruleBlocks;
     }
 
 }

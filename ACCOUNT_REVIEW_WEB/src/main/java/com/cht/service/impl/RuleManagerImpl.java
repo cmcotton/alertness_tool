@@ -3,11 +3,14 @@
  */
 package com.cht.service.impl;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import com.cht.analyzer.Analyzer;
 import com.cht.analyzer.Loader;
+import com.cht.analyzer.RuleBlock;
 import com.cht.db.MySQLDBConnection;
 import com.cht.entity.LoginLogEntity;
 import com.cht.service.RuleManager;
@@ -41,7 +45,11 @@ public class RuleManagerImpl implements RuleManager {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    private List riskEvents;    
+    private List riskEvents;
+    
+    List<RuleBlock> ruleBlocks;
+    
+    private Map<String, List> ruleChains;
 
     /*
      * (non-Javadoc)
@@ -95,4 +103,95 @@ public class RuleManagerImpl implements RuleManager {
             this.riskEvents = riskEvents;
         }
     }
+
+    /* (non-Javadoc)
+     * @see com.cht.service.RuleManager#loadRuleBlock()
+     */
+    @Override
+    public List<RuleBlock> loadRuleBlock() {
+        
+        if (ruleBlocks == null) {
+            Loader loader = new Loader();
+            ruleBlocks = loader.loadRuleBlock();
+        }
+        
+        ruleBlocks.forEach(rb -> {            
+                logger.info("rule block: {}", rb.getName());
+                logger.info("123");
+            }
+        );
+        
+        return ruleBlocks;
+    }
+    
+    /* (non-Javadoc)
+     * @see com.cht.service.RegulationManager#fillinRule(java.lang.String, java.lang.String)
+     */
+    @Override
+    public void runRuleChain(String ruleId) {
+        
+        if (ruleBlocks == null) {
+            Loader loader = new Loader();
+            ruleBlocks = loader.loadRuleBlock();
+        }
+        
+//        ruleBlocks = ruleBlocks.stream().filter(rb -> rb.getId().equals("rbFi le1")).collect(Collectors.toList());
+        logger.info("ruleBlocks size: {}", ruleBlocks.size());
+        
+        logger.info("run ruleId: {}", ruleId);  
+        
+        if ("0".equals(ruleId)) { 
+        
+            // data IN comparedData e.g. sensitive user id
+            List<String> data = ruleBlocks.get(2).importData();
+            List<String> comparedData = ruleBlocks.get(1).importData();
+            
+            data.retainAll(comparedData);
+            
+            try {
+                File file = new File("d:/sensitive_user_id.txt");
+                FileWriter fileWriter = new FileWriter(file);
+                
+                for (String s : data) {
+                    fileWriter.write(s + "\n");
+                }
+                
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+
+        } else if ("1".equals(ruleId)) {
+            // data NOT IN comparedData e.g. abnormal user id
+            
+            List<String> data = ruleBlocks.get(2).importData();
+            List<String> comparedData = ruleBlocks.get(0).importData();
+            
+            data.removeAll(comparedData);
+            
+            try {
+                File file = new File("d:/abnormal_user_id.txt");
+                FileWriter fileWriter = new FileWriter(file);
+                try {
+                    for (String s : data) {
+                        fileWriter.write(s + "\n");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+        } else {
+            logger.info("wrong rule chain id");
+        }
+        
+    }
+   
 }

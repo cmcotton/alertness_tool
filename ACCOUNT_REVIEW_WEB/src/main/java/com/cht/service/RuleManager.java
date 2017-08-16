@@ -5,6 +5,8 @@ package com.cht.service;
 
 import java.util.List;
 
+import com.cht.analyzer.RuleBlock;
+
 
 /**
  * 程式資訊摘要：<P>
@@ -21,4 +23,8 @@ public interface RuleManager {
     List getTableData(String rule);
     
     void runAnalysis(String ruleId);
+    
+    List<RuleBlock> loadRuleBlock();
+   
+    void runRuleChain(String ruleId);
 }

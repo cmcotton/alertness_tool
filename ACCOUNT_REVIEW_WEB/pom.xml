@@ -1,11 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-    
-    
-	<groupId>account-review</groupId>   
-	<artifactId>account-review</artifactId>
-	<version>1.0</version>
+
+	<parent>
+		<groupId>cht</groupId><!-- *請置換app* -->
+		<artifactId>ilm</artifactId><!-- *請置換app* -->
+		<version>1.0</version>
+	</parent>
+
+	
+	<artifactId>account-review</artifactId>	
 	<packaging>war</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -211,12 +215,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongodb-driver</artifactId>
-			<version>3.0.3</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-core</artifactId>
 			<version>2.1.0.RELEASE</version>
@@ -228,6 +226,11 @@
 			<version>3.4</version>
 		</dependency>
 
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
 
 
 		<!-- my jar -->

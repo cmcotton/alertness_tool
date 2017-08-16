@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cht.analyzer.RuleBlock;
 import com.cht.entity.RegulationEntity;
 import com.cht.entity.RuleEntity;
 import com.cht.layout.AbnormalLoginTable;
@@ -37,6 +38,7 @@ import com.cht.logic.IAccountReport;
 import com.cht.plugin.RegulationPlugin;
 import com.cht.proxy.LogProxy;
 import com.cht.service.RegulationManager;
+import com.cht.service.RuleManager;
 
 /**
  * 程式資訊摘要：
@@ -58,6 +60,11 @@ public class RegulationController {
     
     @Resource
     private RegulationManager reguManager;    
+    
+    @Resource
+    private RuleManager ruleManager;
+    
+    List<RuleBlock> ruleBlocks;
     
     @RequestMapping("/plugin")
     public ModelAndView runPlugin() {
@@ -153,6 +160,36 @@ public class RegulationController {
     @RequestMapping("/assembleDataset") 
     public ModelAndView getAssembleDataset() {
         return new ModelAndView("pages/main", "content", "assembleDataset");
+    }
+    
+    @RequestMapping(value = "/loadRuleBlock", method = RequestMethod.POST)
+    public @ResponseBody void loadRuleBlock(HttpServletResponse res) {
+        
+        if (ruleBlocks == null) {
+            ruleBlocks = ruleManager.loadRuleBlock();
+        }
+        
+        try {
+            
+            JSONArray jsonArr = new JSONArray();
+            ruleBlocks.forEach(rb -> {
+                try {
+                    JSONObject json = new JSONObject();
+                    json.put("id", rb.getId());
+                    json.put("name", rb.getName());
+                    jsonArr.put(json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }                
+            });
+        
+            res.setCharacterEncoding("UTF-8");    
+            res.setContentType("json");
+            res.getWriter().write(jsonArr.toString());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        } 
     }
   
 
@@ -424,6 +461,14 @@ public class RegulationController {
         reguManager.fillinRule(oper, rule, attach);
     }
     
+    @RequestMapping(value = "/runRuleChain", method = {RequestMethod.POST, RequestMethod.GET})
+    public @ResponseBody    
+    void runRuleChain(@RequestParam("ruleId") String ruleId, HttpServletResponse res) throws IOException {
+        logger.debug("Start");
+        logger.debug("rule to insert: {}", ruleId);
+ 
+        ruleManager.runRuleChain(ruleId);
+    }
     
     private void setJson(RegulationEntity e, JSONArray jsonArr) {
         JSONObject json = new JSONObject(e);

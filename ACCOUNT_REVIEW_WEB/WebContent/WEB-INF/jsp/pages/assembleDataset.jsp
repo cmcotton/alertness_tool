@@ -17,56 +17,65 @@
 					<div class="col-lg-12">
 						<form role="form">
 							<div class="form-group col-lg-5">
-							
-								<label>資料來源1</label>                               
-								<select class="form-control" ng-model="source1"
-                                        data-ng-options="a.name for a in dataSources1">                
-                                </select>
+
+								<label>資料來源1</label> <select class="form-control"
+									ng-model="source1"
+									data-ng-options="a.name for a in dataSources1">
+								</select>
 
 							</div>
-							
+
 							<div class="form-group col-lg-2">
-                            
-                                <label>比較</label>                               
-                                <select class="form-control" ng-model="oper">
-                                    <option value="in">IN</option>
-                                    <option value="notIn">NOT IN</option>
-                                </select>
-                            </div>
-                            
+
+								<label>比較</label> <select class="form-control" ng-model="oper">
+									<option value="in">IN</option>
+									<option value="notIn">NOT IN</option>
+								</select>
+							</div>
+
 							<div class="form-group col-lg-5">
-							
-								<label>資料來源2</label>                               
-                                <select class="form-control" ng-model="source2"
-                                        data-ng-options="a.name for a in dataSources2">                
-                                </select>
-                            </div>
+
+								<label>資料來源2</label> <select class="form-control"
+									ng-model="source2"
+									data-ng-options="a.name for a in dataSources2">
+								</select>
+							</div>
+
+							<div class="form-group col-lg-2">
+								<label>規則名稱</label> <input type="text" class="form-control" ng-model="ruleChainName">
+							</div>
 						</form>
 
 						<div class="form-group col-lg-12">
-							<button type="button" class="btn btn-primary" id="submit" ng-click="addRule()">加入</button>
+							<button type="button" class="btn btn-primary" id="submit"
+								ng-click="addRule()">加入</button>
 						</div>
 					</div>
 
 					<div class="dataTable_wrapper">
-						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
-						  <tr>
-						      <th>項次</th>
-						      <th>資料來源1</th>
-						      <th class="sorting">比較</th>
-						      <th>資料來源2</th>
-						      <th></th>
-						  </tr>
+						<table class="table table-striped table-bordered table-hover"
+							id="dataTables-example">
+							<tr>
+								<th>項次</th>
+								<th>規則名稱</th>
+								<th>資料來源1</th>
+								<th class="sorting">比較</th>
+								<th>資料來源2</th>
+								<th></th>
+							</tr>
 							<tr ng-repeat="x in currentRules">
-							    <td>{{$index + 1}}</td>
-                                <td>{{x.source1.id + ': ' + x.source1.name}}</td>
-                                <td>{{x.oper}}</td>
-                                <td>{{x.source2.id + ': ' + x.source2.name}}</td>
-                                <td><button type="button" class="btn btn-primary" id="delete" ng-click="delRule($index)">刪除</button></td>
-                            </tr>
+								<td>{{$index + 1}}</td>
+								<td>{{x.ruleChainName}}</td>
+								<td>{{x.source1.id + ': ' + x.source1.name}}</td>
+								<td>{{x.oper}}</td>
+								<td>{{x.source2.id + ': ' + x.source2.name}}</td>
+								<td><button type="button" class="btn btn-primary"
+										id="delete" ng-click="delRule($index)">刪除</button>
+									<button type="button" class="btn btn-primary" id="run"
+										ng-click="run($index)">立刻執行</button></td>
+							</tr>
 						</table>
 					</div>
-
 				</div>
 				<!-- /.panel-body -->
 			</div>
